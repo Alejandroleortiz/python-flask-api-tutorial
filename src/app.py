@@ -6,7 +6,7 @@ todos = [
 ]
 
 @app.route('/todos', methods=['GET'])
-def hello_world():
+def get_todos():
     return jsonify(todos), 200
 
 @app.route('/todos', methods=['POST'])
@@ -19,7 +19,8 @@ def add_new_todo():
 @app.route('/todos/<int:position>', methods=['DELETE'])
 def delete_todo(position):
     print("This is the position to delete: ",position)
-    return 'something'
+    del todos[position] # Eliminar el elemento de la lista de todos en la posición especificada
+    return jsonify(todos), 200 # Retornar la lista actualizada de todos en formato JSON
 
 # These two lines should always be at the end of your app.py file.
 if __name__ == '__main__':
